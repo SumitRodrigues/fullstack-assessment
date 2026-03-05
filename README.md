@@ -16,9 +16,8 @@
    - [Major Bugs](#2-major-bugs-ux--design-issues)
    - [Moderate Bugs](#3-moderate-bugs-security-performance--seo)
    - [Minor Bugs](#4-minor-bugs-architecture--polish)
-5. [Files Changed Summary](#files-changed-summary)
-6. [Enhancements Beyond Bug Fixes](#enhancements-beyond-bug-fixes)
-7. [Architecture Decisions](#architecture-decisions)
+5. [Enhancements Beyond Bug Fixes](#enhancements-beyond-bug-fixes)
+6. [Architecture Decisions](#architecture-decisions)
 
 ---
 
