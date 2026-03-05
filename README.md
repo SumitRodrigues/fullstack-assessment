@@ -79,7 +79,7 @@ The app runs at [http://localhost:3000](http://localhost:3000).
 
 ---
 
-#### Bug #1: Search Fires on Every Keystroke
+#### Bug 1: Search Fires on Every Keystroke
 
 **Problem:** The `useEffect` in `page.tsx` triggered a product API call on every keystroke with no debounce. Typing "kindle" would fire 6 separate API requests, causing race conditions where results from an earlier request could overwrite results from a later one.
 
@@ -101,13 +101,13 @@ useEffect(() => {
 }, [search]);
 ```
 
-**Why this approach:** A 400ms debounce is the industry standard — long enough to batch keystrokes but short enough to feel responsive. Using `useRef` for the timer avoids re-renders. I separated `search` (immediate UI state) from `debouncedSearch` (triggers API call) so the input remains responsive while the API call is delayed.
+**Why this approach:** A 400ms debounce is the industry standard, long enough to batch keystrokes but short enough to feel responsive. Using `useRef` for the timer avoids re-renders. I separated `search` (immediate UI state) from `debouncedSearch` (triggers API call) so the input remains responsive while the API call is delayed.
 
 **File:** `app/page.tsx`
 
 ---
 
-#### Bug #2: Subcategory API Ignores Selected Category
+#### Bug 2: Subcategory API Ignores Selected Category
 
 **Problem:** When selecting a category (e.g., "Tablets"), the subcategory dropdown showed all 203 subcategories from the entire dataset instead of only subcategories belonging to "Tablets".
 
@@ -119,13 +119,13 @@ useEffect(() => {
 fetch(`/api/subcategories?category=${encodeURIComponent(selectedCategory)}`);
 ```
 
-**Why this approach:** The simplest possible fix — the backend already supported category filtering; the frontend just wasn't using it. Also added `encodeURIComponent` to handle category names with special characters (e.g., "3D Printers & Supplies").
+**Why this approach:** The simplest possible fix, the backend already supported category filtering; the frontend just wasn't using it. Also added `encodeURIComponent` to handle category names with special characters (e.g., "3D Printers & Supplies").
 
 **File:** `app/page.tsx`
 
 ---
 
-#### Bug #3: Full Product JSON Passed in URL
+#### Bug 3: Full Product JSON Passed in URL
 
 **Problem:** Clicking a product card navigated to `/product?product={"stacklineSku":"...", "title":"...", ...}` , passing the entire product object as a JSON string in the URL. This caused:
 
@@ -153,7 +153,7 @@ fetch(`/api/subcategories?category=${encodeURIComponent(selectedCategory)}`);
 
 ---
 
-#### Bug #4: Clear Filters Doesn't Reset Category Dropdown
+#### Bug 4: Clear Filters Doesn't Reset Category Dropdown
 
 **Problem:** Clicking "Clear Filters" set `selectedCategory` to `undefined`, which cleared the internal state but did not visually reset the Radix Select component's displayed label. The dropdown still showed the previously selected category.
 
@@ -179,7 +179,7 @@ Added `"All Categories"` as a selectable option in the dropdown with value `"all
 
 ---
 
-#### Bug #26: Missing Image Hostname in Next.js Config
+#### Bug 26: Missing Image Hostname in Next.js Config
 
 **Problem:** Navigating to pages with certain products threw a runtime error: `hostname "images-na.ssl-images-amazon.com" is not configured under images in your next.config.js`. Products on page 2+ triggered this because they used a different Amazon CDN hostname.
 
@@ -204,7 +204,7 @@ remotePatterns: [
 
 ---
 
-#### Bug #5: Prices Not Displayed
+#### Bug 5: Prices Not Displayed
 
 **Problem:** Product prices (`retailPrice`) existed in the JSON data but were never shown to users. An eCommerce site without prices is fundamentally broken.
 
@@ -229,7 +229,7 @@ const formatPrice = (price: number) =>
 
 ---
 
-#### Bug #6: No Pagination
+#### Bug 6: No Pagination
 
 **Problem:** The API was hardcoded to `limit: 20` with no offset controls. Only the first 20 of 500 products were ever visible.
 
@@ -249,7 +249,7 @@ const formatPrice = (price: number) =>
 
 ---
 
-#### Bug #7: Redundant "View Details" Button
+#### Bug 7: Redundant "View Details" Button
 
 **Problem:** The entire product card was wrapped in a `<Link>` component (making it fully clickable), yet a "View Details" button was also placed inside the card. This created:
 
@@ -265,7 +265,7 @@ const formatPrice = (price: number) =>
 
 ---
 
-#### Bug #8: Card Footer / Price Misaligned
+#### Bug 8: Card Footer / Price Misaligned
 
 **Problem:** Product cards with different title lengths caused prices to appear at different vertical positions, creating an uneven grid layout.
 
@@ -284,7 +284,7 @@ Additionally, added `mt-auto` to the `CardFooter` component in `card.tsx` as a g
 
 ---
 
-#### Bug #9: No "All Categories" Reset Option
+#### Bug 9: No "All Categories" Reset Option
 
 **Problem:** Once a category was selected, the only way to deselect it was the "Clear Filters" button. There was no option within the dropdown itself to return to "All Categories."
 
@@ -296,7 +296,7 @@ Additionally, added `mt-auto` to the `CardFooter` component in `card.tsx` as a g
 
 ---
 
-#### Bug #10: Category Dropdown Not Searchable
+#### Bug 10: Category Dropdown Not Searchable
 
 **Problem:** With 136 categories, users had to scroll through a long alphabetical list to find what they wanted. This is very poor UX.
 
@@ -315,7 +315,7 @@ Additionally, added `mt-auto` to the `CardFooter` component in `card.tsx` as a g
 
 ---
 
-#### Bug #11: No Fallback for Missing Images
+#### Bug 11: No Fallback for Missing Images
 
 **Problem:** At least one product in the dataset has an empty `imageUrls` array, resulting in a blank space where the image should be.
 
@@ -337,7 +337,7 @@ Additionally, added `mt-auto` to the `CardFooter` component in `card.tsx` as a g
 
 ---
 
-#### Bug #12: No Left/Right Arrow Navigation on Product Images
+#### Bug 12: No Left/Right Arrow Navigation on Product Images
 
 **Problem:** The product detail page displayed image thumbnails for navigation but lacked the standard left/right arrow buttons that users expect on a product image gallery.
 
@@ -354,7 +354,7 @@ Additionally, added `mt-auto` to the `CardFooter` component in `card.tsx` as a g
 
 ---
 
-#### Bug #13: Hover Cursor Missing on Buttons
+#### Bug 13: Hover Cursor Missing on Buttons
 
 **Problem:** Buttons and clickable elements did not show the pointer cursor on hover, breaking the standard web affordance that tells users "this is clickable."
 
@@ -368,7 +368,7 @@ Additionally, added `mt-auto` to the `CardFooter` component in `card.tsx` as a g
 
 ---
 
-#### Bug #14: Excessive Whitespace Above Features Section
+#### Bug 14: Excessive Whitespace Above Features Section
 
 **Problem:** On the product detail page, there was a large gap above the "Features" section due to stacked padding from the `Card` and `CardContent` components.
 
@@ -384,7 +384,7 @@ Additionally, added `mt-auto` to the `CardFooter` component in `card.tsx` as a g
 
 ---
 
-#### Bug #15: XSS / Data Tampering via URL
+#### Bug 15: XSS / Data Tampering via URL
 
 **Problem:** Product data embedded in the URL could be modified by users to inject malicious content or display fake information (e.g., changing the price to $0.01).
 
@@ -394,7 +394,7 @@ Additionally, added `mt-auto` to the `CardFooter` component in `card.tsx` as a g
 
 ---
 
-#### Bug #16: No Error Handling on API Fetch Calls
+#### Bug 16: No Error Handling on API Fetch Calls
 
 **Problem:** All `fetch()` calls in the application lacked `.catch()` handlers. If the API failed (network error, server error), the UI would silently fail with no user feedback.
 
@@ -426,7 +426,7 @@ fetch(`/api/products?${params}`)
 
 ---
 
-#### Bug #17: No Input Validation on API `limit`/`offset`
+#### Bug 17: No Input Validation on API `limit`/`offset`
 
 **Problem:** The products API accepted any values for `limit` and `offset` without validation. A malicious user could request `?limit=999999` to dump the entire dataset, or use negative values causing unexpected behavior.
 
@@ -447,7 +447,7 @@ if (isNaN(offset) || offset < 0) offset = 0;
 
 ---
 
-#### Bug #18: Default SEO Metadata
+#### Bug 18: Default SEO Metadata
 
 **Problem:** The page title was "Create Next App" and the description was "Generated by create next app", the Next.js boilerplate defaults.
 
@@ -465,7 +465,7 @@ export const metadata: Metadata = {
 
 ---
 
-#### Bug #19: No Caching Strategy
+#### Bug 19: No Caching Strategy
 
 **Problem:** Every page load triggered fresh API requests with no caching, even for data that rarely changes (categories, subcategories).
 
@@ -484,7 +484,7 @@ export const metadata: Metadata = {
 
 ---
 
-#### Bug #20: Product Detail Not Using Dynamic Route
+#### Bug 20: Product Detail Not Using Dynamic Route
 
 **Problem:** The product detail page used `/product?product={...}` (static route with query parameter) instead of the Next.js convention of `/product/[sku]` (dynamic route). This hurt SEO and produced ugly, non-shareable URLs.
 
@@ -494,7 +494,7 @@ export const metadata: Metadata = {
 
 ---
 
-#### Bug #21: Duplicate Product Interface
+#### Bug 21: Duplicate Product Interface
 
 **Problem:** The `Product` TypeScript interface was defined inconsistently in three files: `lib/products.ts`, `app/page.tsx`, and `app/product/page.tsx`. Each had slightly different fields, leading to type safety gaps (e.g., `retailPrice` was in the data but missing from the interfaces in page files).
 
@@ -510,7 +510,7 @@ import type { Product } from "@/lib/products";
 
 ---
 
-#### Bug #22: Plain Text Loading State
+#### Bug 22: Plain Text Loading State
 
 **Problem:** While data loaded, users saw a bare "Loading products..." text string. This looked unfinished and gave no indication of the page layout to come.
 
@@ -525,7 +525,7 @@ import type { Product } from "@/lib/products";
 
 ---
 
-#### Bug #23: No Site Footer
+#### Bug 23: No Site Footer
 
 **Problem:** The page had no footer, which is expected on any professional website for navigation links, legal information, and branding.
 
@@ -540,7 +540,7 @@ import type { Product } from "@/lib/products";
 
 ---
 
-#### Bug #24: Missing eCommerce Features on Detail Page
+#### Bug 24: Missing eCommerce Features on Detail Page
 
 **Problem:** The product detail page lacked essential eCommerce elements — no price, no "Add to Cart" button, no wishlist, and no seller information.
 
@@ -556,7 +556,7 @@ import type { Product } from "@/lib/products";
 
 ---
 
-#### Bug #25: Image Thumbnail Overflow
+#### Bug 25: Image Thumbnail Overflow
 
 **Problem:** Products with many images had thumbnails overflowing their container and breaking the layout.
 
