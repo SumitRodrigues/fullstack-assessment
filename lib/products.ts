@@ -1,4 +1,4 @@
-import productsData from '@/sample-products.json';
+import productsData from "@/sample-products.json";
 
 export interface Product {
   stacklineSku: string;
@@ -7,6 +7,7 @@ export interface Product {
   subCategoryId: number;
   title: string;
   categoryName: string;
+  retailPrice: number;
   retailerSku: string;
   categoryId: number;
   subCategoryName: string;
@@ -32,13 +33,15 @@ export class ProductService {
 
     if (filters?.category) {
       filtered = filtered.filter(
-        (p) => p.categoryName.toLowerCase() === filters.category!.toLowerCase()
+        (p) => p.categoryName.toLowerCase() === filters.category!.toLowerCase(),
       );
     }
 
     if (filters?.subCategory) {
       filtered = filtered.filter(
-        (p) => p.subCategoryName.toLowerCase() === filters.subCategory!.toLowerCase()
+        (p) =>
+          p.subCategoryName.toLowerCase() ===
+          filters.subCategory!.toLowerCase(),
       );
     }
 
@@ -48,7 +51,7 @@ export class ProductService {
         (p) =>
           p.title.toLowerCase().includes(searchLower) ||
           p.categoryName.toLowerCase().includes(searchLower) ||
-          p.subCategoryName.toLowerCase().includes(searchLower)
+          p.subCategoryName.toLowerCase().includes(searchLower),
       );
     }
 
@@ -72,7 +75,7 @@ export class ProductService {
 
     if (category) {
       filtered = filtered.filter(
-        (p) => p.categoryName.toLowerCase() === category.toLowerCase()
+        (p) => p.categoryName.toLowerCase() === category.toLowerCase(),
       );
     }
 
@@ -80,7 +83,7 @@ export class ProductService {
     return Array.from(subCategories).sort();
   }
 
-  getTotalCount(filters?: Omit<ProductFilters, 'limit' | 'offset'>): number {
+  getTotalCount(filters?: Omit<ProductFilters, "limit" | "offset">): number {
     return this.getAll(filters).length;
   }
 }
