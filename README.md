@@ -1,4 +1,4 @@
-# StackShop — Bug Fixes & Enhancements
+# Stackline Full Stack Assignment
 
 ## Author
 
@@ -26,7 +26,7 @@
 
 StackShop is a sample eCommerce application built with **Next.js 15**, **React 19**, **TypeScript**, and **Tailwind CSS**. It includes a product listing page, search/filter functionality, and a product detail page.
 
-Through a thorough code review and manual testing, I identified **26 bugs** spanning functionality, UX/design, security, performance, and architecture. All but one (API authentication — out of scope for a bug-fix assignment) have been fully resolved.
+Through a thorough code review and manual testing, I identified **26 bugs** spanning functionality, UX/design, security, performance, and architecture.
 
 ---
 
@@ -43,35 +43,34 @@ The app runs at [http://localhost:3000](http://localhost:3000).
 
 ## Bugs Identified
 
-| #   | Severity    | Bug                                                       | Status          |
-| --- | ----------- | --------------------------------------------------------- | --------------- |
-| 1   | 🔴 Critical | Search fires on every keystroke (no debounce)             | ✅ Fixed        |
-| 2   | 🔴 Critical | Subcategory API ignores selected category                 | ✅ Fixed        |
-| 3   | 🔴 Critical | Full product JSON passed in URL                           | ✅ Fixed        |
-| 4   | 🔴 Critical | Clear Filters doesn't reset category dropdown             | ✅ Fixed        |
-| 5   | 🟠 Major    | Prices not displayed anywhere                             | ✅ Fixed        |
-| 6   | 🟠 Major    | No pagination (only first 20 products accessible)         | ✅ Fixed        |
-| 7   | 🟠 Major    | Redundant "View Details" button on clickable card         | ✅ Fixed        |
-| 8   | 🟠 Major    | Card footer / price misaligned across cards               | ✅ Fixed        |
-| 9   | 🟠 Major    | No "All Categories" reset option in dropdown              | ✅ Fixed        |
-| 10  | 🟠 Major    | Category dropdown not searchable (136 categories)         | ✅ Fixed        |
-| 11  | 🟠 Major    | No fallback for products with missing images              | ✅ Fixed        |
-| 12  | 🟠 Major    | No left/right arrow navigation on product images          | ✅ Fixed        |
-| 13  | 🟠 Major    | Hover cursor missing on buttons                           | ✅ Fixed        |
-| 14  | 🟠 Major    | Excessive whitespace above Features section               | ✅ Fixed        |
-| 15  | 🟡 Moderate | XSS / data tampering via URL product data                 | ✅ Fixed        |
-| 16  | 🟡 Moderate | No error handling on any API fetch calls                  | ✅ Fixed        |
-| 17  | 🟡 Moderate | No input validation on API `limit`/`offset`               | ✅ Fixed        |
-| 18  | 🟡 Moderate | No authentication/authorization on API routes             | ⚠️ Not in scope |
-| 19  | 🟡 Moderate | Default SEO metadata ("Create Next App")                  | ✅ Fixed        |
-| 20  | 🟡 Moderate | No caching strategy on API responses                      | ✅ Fixed        |
-| 21  | 🔵 Minor    | Product detail not using dynamic route (`/product/[sku]`) | ✅ Fixed        |
-| 22  | 🔵 Minor    | Duplicate `Product` interface defined in 3 files          | ✅ Fixed        |
-| 23  | 🔵 Minor    | Plain text "Loading..." instead of skeleton UI            | ✅ Fixed        |
-| 24  | 🔵 Minor    | No site footer                                            | ✅ Fixed        |
-| 25  | 🔵 Minor    | Missing eCommerce features on detail page                 | ✅ Fixed        |
-| 26  | 🔵 Minor    | Image thumbnails overflow without scrolling               | ✅ Fixed        |
-| 27  | 🔴 Critical | Missing image hostname in Next.js config                  | ✅ Fixed        |
+| #   | Severity | Bug                                                       | Status          |
+| --- | -------- | --------------------------------------------------------- | --------------- |
+| 1   | Critical | Search fires on every keystroke (no debounce)             | ✅ Fixed        |
+| 2   | Critical | Subcategory API ignores selected category                 | ✅ Fixed        |
+| 3   | Critical | Full product JSON passed in URL                           | ✅ Fixed        |
+| 4   | Critical | Clear Filters doesn't reset category dropdown             | ✅ Fixed        |
+| 5   | Major    | Prices not displayed anywhere                             | ✅ Fixed        |
+| 6   | Major    | No pagination (only first 20 products accessible)         | ✅ Fixed        |
+| 7   | Major    | Redundant "View Details" button on clickable card         | ✅ Fixed        |
+| 8   | Major    | Card footer / price misaligned across cards               | ✅ Fixed        |
+| 9   | Major    | No "All Categories" reset option in dropdown              | ✅ Fixed        |
+| 10  | Major    | Category dropdown not searchable (136 categories)         | ✅ Fixed        |
+| 11  | Major    | No fallback for products with missing images              | ✅ Fixed        |
+| 12  | Major    | No left/right arrow navigation on product images          | ✅ Fixed        |
+| 13  | Major    | Hover cursor missing on buttons                           | ✅ Fixed        |
+| 14  | Major    | Excessive whitespace above Features section               | ✅ Fixed        |
+| 15  | Moderate | XSS / data tampering via URL product data                 | ✅ Fixed        |
+| 16  | Moderate | No error handling on any API fetch calls                  | ✅ Fixed        |
+| 17  | Moderate | No input validation on API `limit`/`offset`               | ✅ Fixed        |
+| 18  | Moderate | Default SEO metadata ("Create Next App")                  | ✅ Fixed        |
+| 19  | Moderate | No caching strategy on API responses                      | ✅ Fixed        |
+| 20  | Minor    | Product detail not using dynamic route (`/product/[sku]`) | ✅ Fixed        |
+| 21  | Minor    | Duplicate `Product` interface defined in 3 files          | ✅ Fixed        |
+| 22  | Minor    | Plain text "Loading..." instead of skeleton UI            | ✅ Fixed        |
+| 23  | Minor    | No site footer                                            | ✅ Fixed        |
+| 24  | Minor    | Missing eCommerce features on detail page                 | ✅ Fixed        |
+| 25  | Minor    | Image thumbnails overflow without scrolling               | ✅ Fixed        |
+| 26  | Critical | Missing image hostname in Next.js config                  | ✅ Fixed        |
 
 ---
 
@@ -129,7 +128,7 @@ fetch(`/api/subcategories?category=${encodeURIComponent(selectedCategory)}`);
 
 #### Bug #3: Full Product JSON Passed in URL
 
-**Problem:** Clicking a product card navigated to `/product?product={"stacklineSku":"...", "title":"...", ...}` — passing the entire product object as a JSON string in the URL. This caused:
+**Problem:** Clicking a product card navigated to `/product?product={"stacklineSku":"...", "title":"...", ...}` , passing the entire product object as a JSON string in the URL. This caused:
 
 - URLs exceeding browser limits (~2,000 characters)
 - Security vulnerability (users could tamper with product data in the URL)
@@ -181,7 +180,7 @@ Added `"All Categories"` as a selectable option in the dropdown with value `"all
 
 ---
 
-#### Bug #27: Missing Image Hostname in Next.js Config
+#### Bug #26: Missing Image Hostname in Next.js Config
 
 **Problem:** Navigating to pages with certain products threw a runtime error: `hostname "images-na.ssl-images-amazon.com" is not configured under images in your next.config.js`. Products on page 2+ triggered this because they used a different Amazon CDN hostname.
 
@@ -225,7 +224,7 @@ const formatPrice = (price: number) =>
   );
 ```
 
-**Why this approach:** `Intl.NumberFormat` is the browser's built-in internationalization API — it handles currency symbols, decimal separators, and grouping automatically. No external library needed.
+**Why this approach:** `Intl.NumberFormat` is the browser's built-in internationalization API; it handles currency symbols, decimal separators, and grouping automatically. No external library needed.
 
 **Files:** `lib/products.ts`, `app/page.tsx`, `app/product/[sku]/page.tsx`
 
@@ -292,7 +291,7 @@ Additionally, added `mt-auto` to the `CardFooter` component in `card.tsx` as a g
 
 **Fix:** Added `"All Categories"` as the first option in the category dropdown (value `"all"`), and `"All Subcategories"` in the subcategory dropdown.
 
-**Why this approach:** Standard UX pattern — users expect to find a "show all" option at the top of any filter dropdown. It's intuitive and doesn't require discovering a separate "Clear Filters" button.
+**Why this approach:** Standard UX pattern, users expect to find a "show all" option at the top of any filter dropdown. It's intuitive and doesn't require discovering a separate "Clear Filters" button.
 
 **File:** `app/page.tsx`
 
@@ -310,16 +309,8 @@ Additionally, added `mt-auto` to the `CardFooter` component in `card.tsx` as a g
 - "No results found" empty state
 - Clear search button (×)
 
-```
-┌─────────────────────────┐
-│ 🔍  Search categories... │
-├─────────────────────────┤
-│ Portable Audio & Spkrs  │
-│ Tablets              ✓  │
-└─────────────────────────┘
-```
 
-**Why this approach:** I built a custom component rather than adding a library (like `cmdk`) to avoid introducing new dependencies for a single use case. The component uses only Lucide icons and the existing `cn` utility — zero new dependencies. It's lightweight (~130 lines) and fully controlled.
+**Why this approach:** I built a custom component rather than adding a library (like `cmdk`) to avoid introducing new dependencies for a single use case. The component uses only Lucide icons and the existing `cn` utility: zero new dependencies. It's lightweight (~130 lines) and fully controlled.
 
 **File:** `components/ui/combobox.tsx` (new), `app/page.tsx` (integration)
 
@@ -372,7 +363,7 @@ Additionally, added `mt-auto` to the `CardFooter` component in `card.tsx` as a g
 
 **Fix:** Added `cursor-pointer` to the base button variant styles.
 
-**Why this approach:** Single-line fix at the component level ensures all buttons across the entire app get the pointer cursor automatically — no need to add it to individual instances.
+**Why this approach:** Single-line fix at the component level ensures all buttons across the entire app get the pointer cursor automatically, no need to add it to individual instances.
 
 **File:** `components/ui/button.tsx`
 
@@ -398,7 +389,7 @@ Additionally, added `mt-auto` to the `CardFooter` component in `card.tsx` as a g
 
 **Problem:** Product data embedded in the URL could be modified by users to inject malicious content or display fake information (e.g., changing the price to $0.01).
 
-**Fix:** Eliminated entirely by Bug #3 fix. Product data is now always fetched from the server by SKU — never from client-provided URL data.
+**Fix:** Eliminated entirely by Bug #3 fix. Product data is now always fetched from the server by SKU, never from client-provided URL data.
 
 **File:** `app/product/[sku]/page.tsx`
 
@@ -430,7 +421,7 @@ fetch(`/api/products?${params}`)
 - "Product not found" message with back navigation on the detail page
 - Console warnings for non-critical failures (categories/subcategories)
 
-**Why this approach:** Graceful degradation — users see a clear error message with an actionable recovery path instead of a blank or broken page.
+**Why this approach:** Graceful degradation, users see a clear error message with an actionable recovery path instead of a blank or broken page.
 
 **Files:** `app/page.tsx`, `app/product/[sku]/page.tsx`
 
@@ -457,9 +448,9 @@ if (isNaN(offset) || offset < 0) offset = 0;
 
 ---
 
-#### Bug #19: Default SEO Metadata
+#### Bug #18: Default SEO Metadata
 
-**Problem:** The page title was "Create Next App" and the description was "Generated by create next app" — the Next.js boilerplate defaults.
+**Problem:** The page title was "Create Next App" and the description was "Generated by create next app", the Next.js boilerplate defaults.
 
 **Fix:** Updated to proper StackShop branding:
 
@@ -475,7 +466,7 @@ export const metadata: Metadata = {
 
 ---
 
-#### Bug #20: No Caching Strategy
+#### Bug #19: No Caching Strategy
 
 **Problem:** Every page load triggered fresh API requests with no caching, even for data that rarely changes (categories, subcategories).
 
@@ -494,7 +485,7 @@ export const metadata: Metadata = {
 
 ---
 
-#### Bug #21: Product Detail Not Using Dynamic Route
+#### Bug #20: Product Detail Not Using Dynamic Route
 
 **Problem:** The product detail page used `/product?product={...}` (static route with query parameter) instead of the Next.js convention of `/product/[sku]` (dynamic route). This hurt SEO and produced ugly, non-shareable URLs.
 
@@ -504,7 +495,7 @@ export const metadata: Metadata = {
 
 ---
 
-#### Bug #22: Duplicate Product Interface
+#### Bug #21: Duplicate Product Interface
 
 **Problem:** The `Product` TypeScript interface was defined inconsistently in three files: `lib/products.ts`, `app/page.tsx`, and `app/product/page.tsx`. Each had slightly different fields, leading to type safety gaps (e.g., `retailPrice` was in the data but missing from the interfaces in page files).
 
@@ -514,13 +505,13 @@ export const metadata: Metadata = {
 import type { Product } from "@/lib/products";
 ```
 
-**Why this approach:** Single source of truth — any future field additions only need to be made in one place. Using `import type` ensures the interface is tree-shaken from production bundles.
+**Why this approach:** Single source of truth, any future field additions only need to be made in one place. Using `import type` ensures the interface is tree-shaken from production bundles.
 
 **Files:** `lib/products.ts`, `app/page.tsx`, `app/product/[sku]/page.tsx`
 
 ---
 
-#### Bug #23: Plain Text Loading State
+#### Bug #22: Plain Text Loading State
 
 **Problem:** While data loaded, users saw a bare "Loading products..." text string. This looked unfinished and gave no indication of the page layout to come.
 
@@ -535,7 +526,7 @@ import type { Product } from "@/lib/products";
 
 ---
 
-#### Bug #24: No Site Footer
+#### Bug #23: No Site Footer
 
 **Problem:** The page had no footer, which is expected on any professional website for navigation links, legal information, and branding.
 
@@ -550,7 +541,7 @@ import type { Product } from "@/lib/products";
 
 ---
 
-#### Bug #25: Missing eCommerce Features on Detail Page
+#### Bug #24: Missing eCommerce Features on Detail Page
 
 **Problem:** The product detail page lacked essential eCommerce elements — no price, no "Add to Cart" button, no wishlist, and no seller information.
 
@@ -566,7 +557,7 @@ import type { Product } from "@/lib/products";
 
 ---
 
-#### Bug #26: Image Thumbnail Overflow
+#### Bug #25: Image Thumbnail Overflow
 
 **Problem:** Products with many images had thumbnails overflowing their container and breaking the layout.
 
@@ -582,24 +573,6 @@ Each thumbnail uses `flex-shrink-0` to prevent compression, and the `pb-2` provi
 
 ---
 
-## Files Changed Summary
-
-| File                             | Action      | Key Changes                                                            |
-| -------------------------------- | ----------- | ---------------------------------------------------------------------- |
-| `app/page.tsx`                   | Modified    | Debounced search, fixed filters, pagination, prices, skeletons, footer |
-| `app/product/[sku]/page.tsx`     | **New**     | Dynamic product detail with SKU-based fetching                         |
-| `app/product/page.tsx`           | **Deleted** | Replaced by dynamic route above                                        |
-| `lib/products.ts`                | Modified    | Added `retailPrice` to Product interface                               |
-| `components/ui/combobox.tsx`     | **New**     | Searchable dropdown component                                          |
-| `components/ui/button.tsx`       | Modified    | Added `cursor-pointer`                                                 |
-| `components/ui/card.tsx`         | Modified    | Added `mt-auto` to CardFooter                                          |
-| `app/layout.tsx`                 | Modified    | Updated SEO metadata                                                   |
-| `app/api/products/route.ts`      | Modified    | Input validation, caching headers                                      |
-| `app/api/categories/route.ts`    | Modified    | Caching headers                                                        |
-| `app/api/subcategories/route.ts` | Modified    | Caching headers                                                        |
-| `next.config.ts`                 | Modified    | Added missing image hostname                                           |
-
----
 
 ## Enhancements Beyond Bug Fixes
 
@@ -627,7 +600,7 @@ Radix UI's `Select` component doesn't reliably reset its display when the contro
 
 ### Why client-side pagination instead of server-side?
 
-The product dataset is 500 items loaded from a JSON file in memory — there's no database query cost to offset. Client-side pagination with proper `limit`/`offset` passed to the API is straightforward and avoids adding unnecessary complexity.
+The product dataset is 500 items loaded from a JSON file in memory; there's no database query cost to offset. Client-side pagination with proper `limit`/`offset` passed to the API is straightforward and avoids adding unnecessary complexity.
 
 ### Why fetch product by SKU instead of passing data via URL?
 
